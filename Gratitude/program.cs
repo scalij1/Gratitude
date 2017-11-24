@@ -1,4 +1,10 @@
 ﻿
+using Google.Apis.Auth.OAuth2;
+using Google.Apis.Sheets.v4;
+using Google.Apis.Sheets.v4.Data;
+using Google.Apis.Services;
+using Google.Apis.Util.Store;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,60 +12,17 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-using Google.Apis.Auth.OAuth2;
-using Google.Apis.Sheets.v4;
-using Google.Apis.Sheets.v4.Data;
-using Google.Apis.Services;
-using Google.Apis.Util.Store;
-
-using System;
-using Android.App;
-using Android.Content;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using Android.OS;
-
 namespace Gratitude
 {
-    [Activity(Label = "Gratitude", Icon = "@drawable/icon")]
-    public class MainActivity : BaseActivity
+    class Program
     {
+        // If modifying these scopes, delete your previously saved credentials
+        // at ~/.credentials/sheets.googleapis.com-dotnet-quickstart.json
         static string[] Scopes = { SheetsService.Scope.SpreadsheetsReadonly };
-        static string ApplicationName = "Google Sheets API ";
+        static string ApplicationName = "Google Sheets API .NET Quickstart";
 
-        protected override int LayoutResource
+        static void Main(string[] args)
         {
-            get { return Resource.Layout.main; }
-        }
-        int count = 1;
-
-        protected override void OnCreate(Bundle bundle)
-        {
-            base.OnCreate(bundle);
-
-            // Get our button from the layout resource,
-            // and attach an event to it
-            //var clickButton = FindViewById<Button>(Resource.Id.my_button);
-
-            //clickButton.Click += (sender, args) =>
-            //  {
-            //      clickButton.Text = string.Format("{0} clicks!", count++);
-            //  };
-
-            //var navigationButton = FindViewById<Button>(Resource.Id.nav_button);
-
-            //navigationButton.Click += (sender, args) =>
-            //  {
-            //      var intent = new Intent(this, typeof(SecondActivity));
-            //      intent.PutExtra("clicks", count);
-            //      StartActivity(intent);
-            //  };
-
-
-
-            SupportActionBar.SetDisplayHomeAsUpEnabled(false);
-            SupportActionBar.SetHomeButtonEnabled(false);
             UserCredential credential;
 
             using (var stream =
@@ -101,16 +64,16 @@ namespace Gratitude
                 foreach (var row in values)
                 {
                     // Print columns A and E, which correspond to indices 0 and 4.
-                    //     Console.WriteLine("{0}, {1}", row[0], row[4]);
+                    Console.WriteLine("{0}, {1}", row[0], row[4]);
                 }
             }
             else
             {
-                //   Console.WriteLine("No data found.");
+                Console.WriteLine("No data found.");
             }
-            //Console.Read();
+            Console.Read();
+
 
         }
     }
 }
-
